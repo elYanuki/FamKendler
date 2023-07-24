@@ -1,9 +1,19 @@
-const columnCount = 3
-let currentlocation
+windowSize = "du pisser"
 
-function generateGalleryHtml(count, location){
-    currentlocation = location
+window.fitText(document.querySelector('h1'))
 
+let info = getInfo()
+
+let imageLocation = info.location
+let imageCount = info.count
+let galleryContainer = document.querySelector('main')
+
+let layout = 1
+
+document.querySelector('header h1').innerText = info.heading
+document.querySelector('header p').innerText = info.description
+
+function generateGalleryHtml(columnCount = 3, shownumbers = false){
     //generate empty collumns array
     let columns = []
 
@@ -12,22 +22,57 @@ function generateGalleryHtml(count, location){
     }
 
     //fill collumns array with code for images
-    for (let i = 0; i < count; i++) {
-        columns[i%3] += `<div class="image" onclick="clickImage(${i+1})"><img src="../../img/${location}/small/image (${i+1}).jpg" alt="seise dieses bild wurde net geladen"></div>`
+    for (let i = 0; i < imageCount; i++) {
+        //todo read date from metadata?
+        let infoHTML = ""
+        if(info.image[i]?.heading){
+            let phonedesc = ""
+            if(info.image[i]?.description && windowSize === "small"){
+                phonedesc = `
+                <div class="phoneDesc">
+                    <br>
+                    <p>${info.image[i].description}</p>
+                </div>`
+            }
+
+            infoHTML = `
+            <div class="info">
+                <h3>${info.image[i].heading}</h3>
+                ${phonedesc}
+            </div>`
+        }
+
+        let number = ""
+        if(shownumbers === true){
+            number = `<p class="number">${i}</p>`
+        }
+
+        columns[i%columnCount] += `
+        <div class="image" onclick="clickImage(${i})">
+            <img src="../../img/${imageLocation}/small/image (${i+1}).jpg" alt="seise dieses bild wurde net geladen">
+            ${infoHTML}
+            ${number}
+        </div>`
     }
 
     //transfer code from array into divs and combine
     let html = ""
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < columnCount; i++) {
         html+= `<div class="column">${columns[i]}</div>`
     }
 
-    return html
+    galleryContainer.innerHTML = html
+    galleryContainer.style.gridTemplateColumns = `repeat(${columnCount}, 1fr)`
+
+
+    setTimeout(function(){
+        flattenLastGalleryItems(columnCount)
+    },500)
 }
 
 let lastItemToMove
-function flattenLastGalleryItems(container){
-    let columnHtml = container.querySelectorAll(".column")
+function flattenLastGalleryItems(columnCount){
+    let columnHtml = galleryContainer.querySelectorAll(".column")
 
     //create array of data of the columns
     let columns = []
@@ -50,20 +95,37 @@ function flattenLastGalleryItems(container){
         //call function until bottom is flat
         if(lastItemToMove !== itemToMove){//prevents the same tall image from beeing moved back and forth
             lastItemToMove = itemToMove
-            flattenLastGalleryItems(container)
+            flattenLastGalleryItems(columnCount)
         }
     }
 }
 
 function clickImage(id){
+    if(layout === 1) return
+
     let imageBig = document.querySelector('.imageBig')
 
-    imageBig.style.display = "block"
+    imageBig.style.display = "grid"
     setTimeout(function(){
         imageBig.classList.add("active")
     },)
 
-    imageBig.querySelector("img").src = `../../img/${currentlocation}/full/image (${id}).jpg`
+    imageBig.querySelector("img").src = `../../img/${imageLocation}/full/image (${id+1}).jpg`
+    if(info.image[id]?.heading){
+        imageBig.querySelector("h2").innerText = info.image[id].heading
+    }
+    else{
+        imageBig.querySelector("h2").innerText = ""
+    }
+
+    let descriptionElem = imageBig.querySelector(".description")
+    if(info.image[id]?.description){
+        descriptionElem.innerText = info.image[id].description
+        descriptionElem.style.display = "block"
+    }
+    else{
+        descriptionElem.style.display = "none"
+    }
 }
 
 function closeImage(){
@@ -71,4 +133,32 @@ function closeImage(){
 
     imageBig.classList.remove("active")
     imageBig.style.display = "none"
+}
+
+window.addEventListener("resize", ()=>{
+    checkScreensize()
+})
+
+let header = document.querySelector('header')
+checkScreensize()
+function checkScreensize(){
+    if(window.innerWidth <= 750 && windowSize !== "small"){
+        windowSize = "small"
+        generateGalleryHtml(layout)
+    }
+    else if(window.innerWidth > 750 && windowSize !== "normal"){
+        windowSize = "normal"
+        generateGalleryHtml(3)
+    }
+}
+
+function toggleLayout(button){
+    layout++
+    if(layout>3) layout = 1
+    generateGalleryHtml(layout)
+    button.innerText = layout
+}
+
+function imageNumbers(){
+    generateGalleryHtml(3, true)
 }

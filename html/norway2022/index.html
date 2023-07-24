@@ -7,32 +7,33 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Norwegen 2022</title>
     <link rel="stylesheet" href="../../css/gallery.css">
-    <script src="../../js/gallery.js"></script>
     <script src="../../js/fittext.js"></script>
-    <script src="../../js/fetchdata.js" type="module"></script>
+    <script src="./info.js"></script>
+    <script src="../../js/gallery.js" defer></script>
+    <script src="https://kit.fontawesome.com/7796cb6c97.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div class="home"><a href="../../index.html">home</a></div>
+    <div class="toggleLayout" onclick="toggleLayout(this)">1</div>
+
     <header>
         <h1>Norwegen 2022</h1>
+        <p></p>
     </header>
 
     <div class="imageBig">
-        <div class="back" onclick="closeImage()">backarrowicon</div>
+        <div class="back left" onclick="closeImage()"><p>close</p></div>
+        <div class="back right" onclick="closeImage()"><p>close</p></div>
+
+        <h2></h2>
+
         <div class="image">
             <img src="" alt="seise image wurde net geladen">
+            <p class="description"></p>
         </div>
-
-        <p class="infotext"></p>
+        <div class="opendesc"></div>
     </div>
 
     <main></main>
-
-    <script>
-        document.querySelector('main').innerHTML = generateGalleryHtml(76, "norway2022")
-
-        setTimeout(function(){
-            flattenLastGalleryItems(document.querySelector("main"))
-        },500)
-    </script>
 </body>
 </html>
