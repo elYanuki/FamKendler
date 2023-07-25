@@ -7,6 +7,7 @@ $accent-color: rgb(0, 228, 255);
     font: inherit;
     color: white;
     accent-color: hsl(0, 100, 100%);
+    font-family: "Chivo", sans-serif;
 }
 
 i{
@@ -223,11 +224,13 @@ main .image{
             border-top-left-radius: .5rem;
             border-top-right-radius: .5rem;
             text-align: center;
+            font-size: 1.1rem;
 
             position: absolute;
             bottom: 0;
             transform: translateY(100%);
             transition: all .2s;
+
 
             &::before{
                 content: "\f077";
@@ -270,7 +273,7 @@ main .image{
     }
 
     .back{
-        width: 20%;
+        width: 15%;
         position: fixed;
         top: 0;
         bottom: 0;
@@ -283,26 +286,20 @@ main .image{
 
         &.left{
             left: 0;
-            background: linear-gradient(90deg, hsl(0,0%,50%,40%) 0%, hsl(0,0%,30%,0%) 100%);
+            background: linear-gradient(90deg, hsl(0,0%,50%,30%) 0%, hsl(0,0%,30%,0%) 100%);
             justify-content: left;
         }
 
         &.right{
             right: 0;
-            background: linear-gradient(-90deg, hsl(0,0%,50%,40%) 0%, hsl(0,0%,30%,0%) 100%);
+            background: linear-gradient(-90deg, hsl(0,0%,50%,30%) 0%, hsl(0,0%,30%,0%) 100%);
             justify-content: right;
         }
 
         p{
-            font-family: "Rammetto One", cursive;
-            font-size: 1.5rem;
-            line-height: 3rem;
-            text-transform: uppercase;
-            width: 1ch;
-            line-break: anywhere;
+            font-size: 1.8rem;
             margin-inline: 3vw;
             background-blend-mode: exclusion;
-            text-align: center;
             opacity: .5;
         }
     }

@@ -5,6 +5,7 @@
   font: inherit;
   color: white;
   accent-color: hsl(0, 100%, 100%);
+  font-family: "Chivo", sans-serif;
 }
 
 i {
@@ -197,6 +198,7 @@ main .image .number {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   text-align: center;
+  font-size: 1.1rem;
   position: absolute;
   bottom: 0;
   transform: translateY(100%);
@@ -235,7 +237,7 @@ main .image .number {
   opacity: 1;
 }
 .imageBig .back {
-  width: 20%;
+  width: 15%;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -248,24 +250,18 @@ main .image .number {
 }
 .imageBig .back.left {
   left: 0;
-  background: linear-gradient(90deg, hsla(0, 0%, 50%, 0.4) 0%, hsla(0, 0%, 30%, 0) 100%);
+  background: linear-gradient(90deg, hsla(0, 0%, 50%, 0.3) 0%, hsla(0, 0%, 30%, 0) 100%);
   justify-content: left;
 }
 .imageBig .back.right {
   right: 0;
-  background: linear-gradient(-90deg, hsla(0, 0%, 50%, 0.4) 0%, hsla(0, 0%, 30%, 0) 100%);
+  background: linear-gradient(-90deg, hsla(0, 0%, 50%, 0.3) 0%, hsla(0, 0%, 30%, 0) 100%);
   justify-content: right;
 }
 .imageBig .back p {
-  font-family: "Rammetto One", cursive;
-  font-size: 1.5rem;
-  line-height: 3rem;
-  text-transform: uppercase;
-  width: 1ch;
-  line-break: anywhere;
+  font-size: 1.8rem;
   margin-inline: 3vw;
   background-blend-mode: exclusion;
-  text-align: center;
   opacity: 0.5;
 }
 .imageBig .backPhone {

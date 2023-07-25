@@ -64,14 +64,15 @@ function generateGalleryHtml(columnCount = 3, shownumbers = false){
     galleryContainer.innerHTML = html
     galleryContainer.style.gridTemplateColumns = `repeat(${columnCount}, 1fr)`
 
-
-    window.onload = function(){
-        flattenLastGalleryItems(columnCount)
-    }
+    flattenLastGalleryItems(columnCount)
 }
 
 let lastItemToMove
 function flattenLastGalleryItems(columnCount){
+    if(document.readyState !== "complete"){
+        setTimeout(function (){flattenLastGalleryItems(columnCount)}, 50)
+        return
+    }
     let columnHtml = galleryContainer.querySelectorAll(".column")
 
     //create array of data of the columns
@@ -87,8 +88,8 @@ function flattenLastGalleryItems(columnCount){
     //sort columns by their height
     columns = columns.sort((a,b)=>{return b.height - a.height})
 
-    //if biggest is > 100px taller than smallest
-    if(columns[0].height - columns.at(-1).height > 200){
+    //if biggest is taller than smallest
+    if(columns[0].height > columns.at(-1).height){
         let itemToMove = columns[0].html.querySelector('.image:last-child')
         columns.at(-1).html.appendChild(itemToMove)
 
