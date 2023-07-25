@@ -77,16 +77,16 @@ header{
     &:hover{
         color: rgb(0, 228, 255);
     }
-
-    &.home{
-        left: .5rem;
-    }
-
-    &.toggleLayout{
-        right: .5rem;
-    }
 }
 
+.home{
+    left: .5rem;
+}
+
+.toggleLayout{
+    right: .5rem;
+    display: none;
+}
 
 main{
     display: grid;
@@ -299,5 +299,9 @@ main .image{
 
     .home{
         position: sticky;
+    }
+
+    .toggleLayout{
+        display: block;
     }
 }

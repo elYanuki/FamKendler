@@ -69,11 +69,14 @@ header h1 {
 .home:hover, .toggleLayout:hover {
   color: rgb(0, 228, 255);
 }
-.home.home, .toggleLayout.home {
+
+.home {
   left: 0.5rem;
 }
-.home.toggleLayout, .toggleLayout.toggleLayout {
+
+.toggleLayout {
   right: 0.5rem;
+  display: none;
 }
 
 main {
@@ -259,6 +262,9 @@ main .image .number {
   }*/
   .home {
     position: sticky;
+  }
+  .toggleLayout {
+    display: block;
   }
 }
 

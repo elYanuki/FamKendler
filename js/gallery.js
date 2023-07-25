@@ -65,9 +65,9 @@ function generateGalleryHtml(columnCount = 3, shownumbers = false){
     galleryContainer.style.gridTemplateColumns = `repeat(${columnCount}, 1fr)`
 
 
-    setTimeout(function(){
+   /* setTimeout(function(){
         flattenLastGalleryItems(columnCount)
-    },500)
+    },500)*/
 }
 
 let lastItemToMove
@@ -101,7 +101,7 @@ function flattenLastGalleryItems(columnCount){
 }
 
 function clickImage(id){
-    if(layout === 1) return
+    if(layout === 1 && windowSize === "small") return
 
     let imageBig = document.querySelector('.imageBig')
 
