@@ -7,6 +7,10 @@
   accent-color: hsl(0, 100%, 100%);
 }
 
+i {
+  color: inherit;
+}
+
 img {
   width: 100%;
   display: block;
@@ -20,6 +24,8 @@ body {
   background: radial-gradient(circle, hsl(0, 0%, 15%) 0%, hsl(0, 0%, 20%) 100%);
   color: hsl(0, 0%, 0%);
   font-family: sans-serif;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 body::-webkit-scrollbar {
   display: none;
@@ -35,7 +41,11 @@ body:has(.imageBig.active) {
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: rgb(0, 228, 255);
+  transition: color 0.2s;
+}
+a:hover {
+  color: #2ec7d9;
 }
 
 button {
@@ -56,18 +66,24 @@ header h1 {
 }
 
 .home, .toggleLayout {
+  backdrop-filter: blur(10px);
   position: fixed;
   top: 0.5rem;
   padding: 0.5rem;
   background-color: hsla(0, 0%, 10%, 0.5);
   border-radius: 0.5rem;
-  transition: all 0.3s;
+  transition: all 0.2s;
   cursor: pointer;
   z-index: 100;
   width: fit-content;
+  color: white;
+  font-size: 1.3rem;
 }
 .home:hover, .toggleLayout:hover {
   color: rgb(0, 228, 255);
+}
+.home a, .toggleLayout a {
+  color: inherit;
 }
 
 .home {
@@ -160,7 +176,6 @@ main .image .number {
 }
 .imageBig .image {
   scale: 0;
-  height: 90vh;
   width: 100%;
   transition: all 0.3s;
   position: relative;
@@ -188,7 +203,8 @@ main .image .number {
   transition: all 0.2s;
 }
 .imageBig .image .description::before {
-  content: "desc";
+  content: "\f077";
+  font: normal normal normal 14px/1 FontAwesome;
   position: absolute;
   bottom: 100%;
   left: 50%;
@@ -241,16 +257,29 @@ main .image .number {
   justify-content: right;
 }
 .imageBig .back p {
-  display: none;
-  font-size: 2rem;
-  font-family: "Arial", sans-serif;
+  font-family: "Rammetto One", cursive;
+  font-size: 1.5rem;
+  line-height: 3rem;
   text-transform: uppercase;
   width: 1ch;
   line-break: anywhere;
   margin-inline: 3vw;
-  color: hsla(0, 0%, 80%, 0.5);
-  mix-blend-mode: overlay;
+  background-blend-mode: exclusion;
   text-align: center;
+  opacity: 0.5;
+}
+.imageBig .backPhone {
+  display: none;
+  position: fixed;
+  bottom: 1rem;
+  z-index: 200;
+  background-color: hsla(0, 0%, 0%, 0.5);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0.3rem 0.3rem rgba(255, 255, 255, 0.2);
 }
 
 @media screen and (max-width: 750px) {
@@ -265,6 +294,18 @@ main .image .number {
   }
   .toggleLayout {
     display: block;
+  }
+  .imageBig .back {
+    display: none;
+  }
+  .imageBig .backPhone {
+    display: block;
+  }
+  .imageBig .opendesc {
+    display: none;
+  }
+  .home, .toggleLayout {
+    font-size: 1rem;
   }
 }
 

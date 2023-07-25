@@ -11,7 +11,7 @@ let galleryContainer = document.querySelector('main')
 let layout = 1
 
 document.querySelector('header h1').innerText = info.heading
-document.querySelector('header p').innerText = info.description
+document.querySelector('header p').innerHTML = info.description
 
 function generateGalleryHtml(columnCount = 3, shownumbers = false){
     //generate empty collumns array
@@ -65,9 +65,9 @@ function generateGalleryHtml(columnCount = 3, shownumbers = false){
     galleryContainer.style.gridTemplateColumns = `repeat(${columnCount}, 1fr)`
 
 
-   /* setTimeout(function(){
+    window.onload = function(){
         flattenLastGalleryItems(columnCount)
-    },500)*/
+    }
 }
 
 let lastItemToMove

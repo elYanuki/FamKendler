@@ -1,9 +1,16 @@
+$accent-color: rgb(0, 228, 255);
+
+
 *{
     margin: 0;
     padding: 0;
     font: inherit;
     color: white;
     accent-color: hsl(0, 100, 100%);
+}
+
+i{
+    color: inherit;
 }
 
 img{
@@ -24,6 +31,9 @@ body{
         display: none;
     }
 
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
     &:has(.imageBig.active){
         overflow-y: hidden;
     }
@@ -36,7 +46,12 @@ body{
 
 a{
     text-decoration: none;
-    color: inherit;
+    color: $accent-color;
+    transition: color .2s;
+
+    &:hover{
+        color: #2ec7d9;
+    }
 }
 
 button{
@@ -64,18 +79,25 @@ header{
 }
 
 .home, .toggleLayout{
+    backdrop-filter: blur(10px);
     position: fixed;
     top: .5rem;
     padding: .5rem;
     background-color: hsl(0,0,10%,50%);
     border-radius: .5rem;
-    transition: all .3s;
+    transition: all .2s;
     cursor: pointer;
     z-index: 100;
     width: fit-content;
+    color: white;
+    font-size: 1.3rem;
 
     &:hover{
         color: rgb(0, 228, 255);
+    }
+
+    a{
+        color: inherit;
     }
 }
 
@@ -178,7 +200,6 @@ main .image{
 
     .image{
         scale: 0;
-        height: 90vh;
         width: 100%;
         transition: all .3s;
         position: relative;
@@ -209,7 +230,8 @@ main .image{
             transition: all .2s;
 
             &::before{
-                content: "desc";
+                content: "\f077";
+                font: normal normal normal 14px/1 FontAwesome;
                 position: absolute;
                 bottom: 100%;
                 left: 50%;
@@ -272,20 +294,32 @@ main .image{
         }
 
         p{
-            display: none;
-
-            font-size: 2rem;
-            font-family: "Arial", sans-serif;
+            font-family: "Rammetto One", cursive;
+            font-size: 1.5rem;
+            line-height: 3rem;
             text-transform: uppercase;
             width: 1ch;
             line-break: anywhere;
             margin-inline: 3vw;
-            color: hsl(0,0,80%,50%);
-            mix-blend-mode: overlay;
+            background-blend-mode: exclusion;
             text-align: center;
+            opacity: .5;
         }
     }
 
+    .backPhone{
+        display: none;
+        position: fixed;
+        bottom: 1rem;
+        z-index: 200;
+        background-color: hsl(0,0,0%,50%);
+        border-radius: .5rem;
+        backdrop-filter: blur(10px);
+        padding: .5rem 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 0 .3rem .3rem rgba(255, 255, 255, 0.2);
+    }
 }
 
 @media screen and (max-width: 750px){
@@ -303,5 +337,22 @@ main .image{
 
     .toggleLayout{
         display: block;
+    }
+
+    .imageBig{
+        .back{
+            display: none;
+        }
+        .backPhone{
+            display: block;
+        }
+
+        .opendesc{
+            display: none;
+        }
+    }
+
+    .home, .toggleLayout{
+        font-size: 1rem;
     }
 }

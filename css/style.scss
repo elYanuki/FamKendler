@@ -4,6 +4,7 @@
   font: inherit;
   accent-color: hsl(0, 100, 100%);
   color: white;
+  font-family: 'Chivo', sans-serif;
 }
 
 img {
@@ -21,9 +22,15 @@ body {
   background-repeat: no-repeat;
   color: hsl(0, 0, 0%);
   font-family: sans-serif;
-  overflow-y: hidden;
   position: relative;
   min-height: 100vh;
+
+  &::-webkit-scrollbar{
+    display: none;
+  }
+
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 ::selection {
@@ -45,6 +52,7 @@ button {
 //main
 
 @import url('https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chivo:wght@300&display=swap');
 
 .linkoverlay{
   position: absolute;
@@ -98,16 +106,31 @@ path, polygon {
 
   h2{
     font-family: "Rammetto One", cursive;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin-bottom: .5rem;
 
     &:not(:first-of-type){
-      margin-top: 1rem;
+      margin-top: 1.2rem;
     }
   }
 
   a{
-    margin-left: .5rem;
+    margin-left: .8rem;
+    font-size: 1.1rem;
+    position: relative;
+
+    &::before{
+      content: "";
+      display: block;
+      position: absolute;
+      height: .3rem;
+      border-radius: 30%;
+      aspect-ratio: 1;
+      background-color: white;
+      top: 50%;
+      transform: translateY(-50%);
+      rotate: 45deg;
+    }
   }
 }
 

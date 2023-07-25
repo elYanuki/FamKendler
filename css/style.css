@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:wght@300&display=swap");
 * {
   margin: 0;
   padding: 0;
   font: inherit;
   accent-color: hsl(0, 100%, 100%);
   color: white;
+  font-family: "Chivo", sans-serif;
 }
 
 img {
@@ -22,9 +24,13 @@ body {
   background-repeat: no-repeat;
   color: hsl(0, 0%, 0%);
   font-family: sans-serif;
-  overflow-y: hidden;
   position: relative;
   min-height: 100vh;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none;
 }
 
 ::selection {
@@ -87,14 +93,28 @@ path.visited:hover, path.visited.active, polygon.visited:hover, polygon.visited.
 }
 #phone-nav h2 {
   font-family: "Rammetto One", cursive;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-bottom: 0.5rem;
 }
 #phone-nav h2:not(:first-of-type) {
-  margin-top: 1rem;
+  margin-top: 1.2rem;
 }
 #phone-nav a {
-  margin-left: 0.5rem;
+  margin-left: 0.8rem;
+  font-size: 1.1rem;
+  position: relative;
+}
+#phone-nav a::before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 0.3rem;
+  border-radius: 30%;
+  aspect-ratio: 1;
+  background-color: white;
+  top: 50%;
+  transform: translateY(-50%);
+  rotate: 45deg;
 }
 
 @media screen and (max-width: 750px) {
