@@ -17,9 +17,17 @@
     <div class="toggleLayout" onclick="toggleLayout(this)">1</div>
 
     <header>
-        <h1>Norwegen 2022</h1>
-        <p></p>
+        <h1 data-prop="heading">Norwegen 2022</h1>
+        <p data-prop="description"></p>
     </header>
+
+    <div class="edit-output">
+        <div class="top">
+            <p class="heading">Code für alle beschreibungen - einfach yanik geben</p>
+            <p class="copy" onclick="copycode(this)"><i class="fa-solid fa-copy"></i>copy</p>
+        </div>
+        <p class="code"></p>
+    </div>
 
     <div class="imageBig">
         <div class="back left" onclick="closeImage()"><p>&#9587;</p></div>

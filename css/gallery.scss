@@ -76,6 +76,18 @@ header{
             family: 'Rammetto One', cursive;
         }
         color: white;
+        line-height: 1ch;
+        padding-block: 2rem;
+        height: fit-content;
+    }
+
+    p{
+        z-index: 5;
+    }
+
+    h1, p{
+        outline-offset: .5rem;
+        border-radius: .3rem;
     }
 }
 
@@ -131,7 +143,6 @@ main{
 main .image{
     border-radius: .5rem;
     overflow: hidden;
-    cursor: zoom-in;
     position: relative;
 
     outline: 1px solid hsl(0,0,60%,0%);
@@ -170,6 +181,10 @@ main .image{
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
+    }
+
+    img{
+        cursor: zoom-in;
     }
 }
 
@@ -268,7 +283,7 @@ main .image{
         text-shadow: 0 0 .5rem #131313;
     }
 
-    &:has(.back:hover) .back{
+    &:has(.back:hover) .back::before{
         opacity: 1;
     }
 
@@ -278,22 +293,32 @@ main .image{
         top: 0;
         bottom: 0;
         z-index: 100;
-        opacity: 0;
-        transition: opacity .3s;
+        transition: all .3s;
         cursor: pointer;
         display: grid;
         align-content: center;
+        background-repeat: no-repeat;
 
         &.left{
             left: 0;
-            background: linear-gradient(90deg, hsl(0,0%,50%,30%) 0%, hsl(0,0%,30%,0%) 100%);
+            --bg: linear-gradient(90deg, hsla(0, 0%, 50%, 0.4) 0%, hsl(0, 0%, 30%, 0%) 100%);
             justify-content: left;
         }
 
         &.right{
             right: 0;
-            background: linear-gradient(-90deg, hsl(0,0%,50%,30%) 0%, hsl(0,0%,30%,0%) 100%);
+            --bg: linear-gradient(-90deg, hsla(0, 0%, 50%, 0.4) 0%, hsl(0, 0%, 30%, 0%) 100%);
             justify-content: right;
+        }
+
+        &:before{
+            content: "";
+            display: block;
+            position: absolute;
+            inset: 0;
+            background: var(--bg);
+            opacity: 0;
+            transition: all .3s;
         }
 
         p{
@@ -351,5 +376,71 @@ main .image{
 
     .home, .toggleLayout{
         font-size: 1rem;
+    }
+}
+
+//editor
+
+.edit-output{
+    display: none;
+    
+    width: 80%;
+    margin: 1rem;
+    margin-inline: auto;
+    background-color: hsl(0,0,30%);
+    padding: 1rem;
+    border-radius: .5rem;
+
+    .top{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: .5rem;
+
+        p{
+            padding: .3rem;
+        }
+
+        .copy{
+            cursor: pointer;
+            transition: all .3s;
+            border-radius: .5rem;
+
+            &:hover{
+                outline: 1px solid hsl(0,0,80%);
+            }
+
+            i{
+                margin-inline: .5rem;
+            }
+        }
+    }
+
+    .code{
+        border: hsl(0,0,60%) solid .1rem;
+        padding: .5rem;
+        border-radius: .5rem;
+        color: hsl(0,0,80%);
+    }
+}
+
+.editor{
+    padding: .5rem;
+
+    label{
+        color: hsl(0,0,80%);
+        margin-top: .5rem;
+        display: block;
+    }
+
+    p{
+        background-color: hsl(0,0,30%);
+        padding: .3rem;
+        border-radius: .3rem;
+        transition: all .3s;
+        outline: .1rem solid hsl(0,0,70%,0%);
+
+        &:focus{
+            outline-color: hsl(0,0,70%,100%);
+        }
     }
 }

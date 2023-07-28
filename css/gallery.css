@@ -64,6 +64,16 @@ header h1 {
   font-size: 5rem;
   font-family: "Rammetto One", cursive;
   color: white;
+  line-height: 1ch;
+  padding-block: 2rem;
+  height: fit-content;
+}
+header p {
+  z-index: 5;
+}
+header h1, header p {
+  outline-offset: 0.5rem;
+  border-radius: 0.3rem;
 }
 
 .home, .toggleLayout {
@@ -115,7 +125,6 @@ main .column {
 main .image {
   border-radius: 0.5rem;
   overflow: hidden;
-  cursor: zoom-in;
   position: relative;
   outline: 1px solid hsla(0, 0%, 60%, 0);
   transition: outline-color 0.3s;
@@ -150,6 +159,9 @@ main .image .number {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+main .image img {
+  cursor: zoom-in;
 }
 
 .imageBig {
@@ -233,7 +245,7 @@ main .image .number {
   font-size: 2rem;
   text-shadow: 0 0 0.5rem #131313;
 }
-.imageBig:has(.back:hover) .back {
+.imageBig:has(.back:hover) .back::before {
   opacity: 1;
 }
 .imageBig .back {
@@ -242,21 +254,30 @@ main .image .number {
   top: 0;
   bottom: 0;
   z-index: 100;
-  opacity: 0;
-  transition: opacity 0.3s;
+  transition: all 0.3s;
   cursor: pointer;
   display: grid;
   align-content: center;
+  background-repeat: no-repeat;
 }
 .imageBig .back.left {
   left: 0;
-  background: linear-gradient(90deg, hsla(0, 0%, 50%, 0.3) 0%, hsla(0, 0%, 30%, 0) 100%);
+  --bg: linear-gradient(90deg, hsla(0, 0%, 50%, 0.4) 0%, hsl(0, 0%, 30%, 0%) 100%);
   justify-content: left;
 }
 .imageBig .back.right {
   right: 0;
-  background: linear-gradient(-90deg, hsla(0, 0%, 50%, 0.3) 0%, hsla(0, 0%, 30%, 0) 100%);
+  --bg: linear-gradient(-90deg, hsla(0, 0%, 50%, 0.4) 0%, hsl(0, 0%, 30%, 0%) 100%);
   justify-content: right;
+}
+.imageBig .back:before {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  opacity: 0;
+  transition: all 0.3s;
 }
 .imageBig .back p {
   font-size: 1.8rem;
@@ -303,6 +324,59 @@ main .image .number {
   .home, .toggleLayout {
     font-size: 1rem;
   }
+}
+.edit-output {
+  display: none;
+  width: 80%;
+  margin: 1rem;
+  margin-inline: auto;
+  background-color: hsl(0, 0%, 30%);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.edit-output .top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.edit-output .top p {
+  padding: 0.3rem;
+}
+.edit-output .top .copy {
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 0.5rem;
+}
+.edit-output .top .copy:hover {
+  outline: 1px solid hsl(0, 0%, 80%);
+}
+.edit-output .top .copy i {
+  margin-inline: 0.5rem;
+}
+.edit-output .code {
+  border: hsl(0, 0%, 60%) solid 0.1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: hsl(0, 0%, 80%);
+}
+
+.editor {
+  padding: 0.5rem;
+}
+.editor label {
+  color: hsl(0, 0%, 80%);
+  margin-top: 0.5rem;
+  display: block;
+}
+.editor p {
+  background-color: hsl(0, 0%, 30%);
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+  transition: all 0.3s;
+  outline: 0.1rem solid hsla(0, 0%, 70%, 0);
+}
+.editor p:focus {
+  outline-color: hsl(0, 0%, 70%);
 }
 
 /*# sourceMappingURL=gallery.css.map */

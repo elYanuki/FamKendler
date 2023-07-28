@@ -9,9 +9,67 @@ let imageCount = info.count
 let galleryContainer = document.querySelector('main')
 
 let layout = 1
+let editing = enterEditmode()
 
 document.querySelector('header h1').innerText = info.heading
-document.querySelector('header p').innerHTML = info.description
+if(editing)
+    document.querySelector('header p').innerText = info.description
+else
+    document.querySelector('header p').innerHTML = info.description
+
+function enterEditmode(){
+    let url = window.location.search
+    let getQuery = url.split('?')[1]
+    let params = getQuery?.split('&')
+    if (!params?.includes("edit")) return false
+
+    document.querySelector(".edit-output").style.display = "block"
+
+    document.querySelectorAll('header *').forEach((elem)=>{
+        elem.style.outline = `.1rem solid hsl(0,0%,70%)`
+        elem.setAttribute("contentEditable", true)
+        elem.onblur = function () {confirmEdit(elem)}
+    })
+    document.querySelector('header p').style.marginTop = "2rem";
+
+    confirmEdit() //to display info in code section
+
+    return true
+}
+
+function confirmEdit(elem){
+    if(elem?.dataset.imageid && !info.image[elem.dataset.imageid]){
+        info.image[elem.dataset.imageid] = {heading:"", description: ""}
+    }
+
+    switch (elem?.dataset.prop) {
+        case "heading":
+            info.heading = elem.innerText
+            break
+        case "description":
+            info.description = elem.innerText
+            break
+        case "image-heading":
+            info.image[elem.dataset.imageid].heading = elem.innerText
+            break
+        case "image-description":
+            info.image[elem.dataset.imageid].description = elem.innerText
+            break
+    }
+
+    document.querySelector('.edit-output .code').innerText = JSON.stringify(info)
+}
+
+function copycode(elem){
+    navigator.clipboard.writeText(JSON.stringify(info))
+
+    elem.animate([{backgroundColor:"transparent"}, {backgroundColor:"green"}], {duration: 300, fill: "forwards"})
+
+    setTimeout(function(){
+        elem.animate([{backgroundColor:"green"}, {backgroundColor:"transparent"}], {duration: 300, fill: "forwards"})
+
+    },1000)
+}
 
 function generateGalleryHtml(columnCount = 3, shownumbers = false){
     //generate empty collumns array
@@ -24,8 +82,10 @@ function generateGalleryHtml(columnCount = 3, shownumbers = false){
     //fill collumns array with code for images
     for (let i = 0; i < imageCount; i++) {
         //todo read date from metadata?
+
+        //description
         let infoHTML = ""
-        if(info.image[i]?.heading){
+        if(info.image[i]?.heading && editing === false){
             let phonedesc = ""
             if(info.image[i]?.description && windowSize === "small"){
                 phonedesc = `
@@ -42,16 +102,23 @@ function generateGalleryHtml(columnCount = 3, shownumbers = false){
             </div>`
         }
 
-        let number = ""
-        if(shownumbers === true){
-            number = `<p class="number">${i}</p>`
+        //editor
+        let editor = ""
+        if(editing === true){
+            editor = `
+                <div class="editor">
+                    <label>titel</label>
+                    <p data-prop="image-heading" data-imageID="${i}" onblur="confirmEdit(this)" contenteditable="true">${info?.image[i]?.heading || ""}</p>
+                    <label>beschreibung</label>
+                    <p data-prop="image-description" data-imageID="${i}" onblur="confirmEdit(this)" contenteditable="true">${info?.image[i]?.description || ""}</p>
+                </div>`
         }
 
         columns[i%columnCount] += `
-        <div class="image" onclick="clickImage(${i})">
-            <img src="../../img/${imageLocation}/small/image (${i+1}).jpg" alt="seise dieses bild wurde net geladen">
+        <div class="image" ${editing === true ? "style='outline-color: hsla(0,0%,60%,100%)'" : ""}>
+            <img onclick="clickImage(${i})" src="../../img/${imageLocation}/small/image (${i+1}).jpg" alt="seise dieses bild wurde net geladen">
             ${infoHTML}
-            ${number}
+            ${editor}
         </div>`
     }
 
@@ -160,6 +227,14 @@ function toggleLayout(button){
     button.innerText = layout
 }
 
-function imageNumbers(){
-    generateGalleryHtml(3, true)
+if(editing === true) {
+    window.addEventListener("beforeunload", function (e) {
+        (e || window.event).preventDefault()
+        var confirmationMessage = 'Bist du sicher das du die Seite verlassen willst?'
+            + 'Kopiere und sende den code an Yanik sonst wird keien änderung gespeichert.';
+
+        (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+
+        return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+    });
 }
