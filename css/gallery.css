@@ -61,7 +61,7 @@ header {
   padding-bottom: 1rem;
 }
 header h1 {
-  font-size: 5rem;
+  font-size: 3rem;
   font-family: "Rammetto One", cursive;
   color: white;
   line-height: 1ch;
@@ -297,6 +297,17 @@ main .image img {
   left: 50%;
   transform: translateX(-50%);
   box-shadow: 0 0 0.3rem 0.3rem rgba(255, 255, 255, 0.2);
+}
+
+#to-top {
+  margin-inline: auto;
+  background-color: hsl(0, 0%, 30%);
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  display: block;
+  width: fit-content;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 
 @media screen and (max-width: 750px) {

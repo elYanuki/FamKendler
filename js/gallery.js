@@ -1,6 +1,4 @@
-windowSize = "du pisser"
-
-window.fitText(document.querySelector('h1'))
+let windowSize = "du pisser"
 
 let info = getInfo()
 
@@ -12,10 +10,14 @@ let layout = 1
 let editing = enterEditmode()
 
 document.querySelector('header h1').innerText = info.heading
-if(editing)
-    document.querySelector('header p').innerText = info.description
-else
+
+if(editing === false){
     document.querySelector('header p').innerHTML = info.description
+    window.fitText(document.querySelector('h1'))
+}
+else{
+    document.querySelector('header p').innerText = info.description
+}
 
 function enterEditmode(){
     let url = window.location.search
