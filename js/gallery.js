@@ -10,6 +10,7 @@ let layout = 1
 let editing = enterEditmode()
 
 document.querySelector('header h1').innerText = info.heading
+document.title = info.heading
 
 if(editing === false){
     document.querySelector('header p').innerHTML = info.description

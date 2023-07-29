@@ -34,7 +34,7 @@ function openCountryMenue(click){
     let html = ""
 
     if(!visitlist[country] || visitlist[country].length === 0){
-        html = "<p>no visits yet</p>"
+        html = "<p>no recordet visists</p>"
     }
     else {
         visitlist[country]?.forEach((visit) => {
@@ -79,7 +79,7 @@ function generatePhoneNav(){
         phoneNavHtml += `<h2>${HRCountryNames[key]}</h2>`
 
         country.forEach((visit)=>{
-            phoneNavHtml += `<a href="./html/${visit.location}/index.html">${visit.HRname}</a>`
+            phoneNavHtml += `<a href="./html/${visit.location}/">${visit.HRname}</a>`
         })
     }
     document.querySelector('#phone-nav').innerHTML = phoneNavHtml

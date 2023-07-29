@@ -64,7 +64,7 @@ header h1 {
   font-size: 3rem;
   font-family: "Rammetto One", cursive;
   color: white;
-  line-height: 1ch;
+  line-height: 120%;
   padding-block: 2rem;
   height: fit-content;
 }
