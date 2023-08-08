@@ -82,7 +82,7 @@ path.visited, polygon.visited {
   fill: #2ec7d9;
   cursor: pointer;
 }
-path.visited:hover, path.visited.active, polygon.visited:hover, polygon.visited.active {
+path.visited.active, path.visited.hovered, polygon.visited.active, polygon.visited.hovered {
   filter: url(#hover);
   fill: #00e4ff;
 }

@@ -1,31 +1,30 @@
 const visitlist = {
-    norway: [
-        {HRname: "Norwegen 2022", location: "norway2022"}
-    ],
-    sweden: [
-        {HRname: "Schweden 2021", location: "sweden2021"}
-    ],
-    uk: [
-        {HRname: "England 2023", location: "uk2023"}
-    ],
-    spain: [
-        {HRname: "Barcelona 2022", location: "barcelona2022"}
-    ]
-}
-
-let HRCountryNames = {
-    uk: "England",
-    norway: "Norwegen",
-    sweden: "Schweden",
-    spain: "Spanien",
-    italy: "Italien"
+    norway: {
+        HRname: "Norwegen",
+        visits: [
+            {HRname: "Norwegen 2022", location: "norway2022"}
+        ]
+    },
+    uk: {
+        HRname: "England",
+        visits: [
+            {HRname: "England 2023", location: "uk2023"}
+        ]
+    },
 }
 
 generatePhoneNav()
 
-document.querySelectorAll('.visited').forEach((elem)=>{
-    elem.addEventListener("click", openCountryMenue)
-})
+for (let key in visitlist){
+    document.querySelectorAll(`svg *[data-country='${key}']`).forEach((elem)=>{
+        elem.addEventListener("click", openCountryMenue)
+        elem.classList.add("visited")
+        elem.onmouseenter = function () {
+            handelHover(key)
+        }
+        elem.onmouseleave = endHover
+    })
+}
 
 const linkOverlay = document.querySelector('.linkoverlay')
 function openCountryMenue(click){
@@ -33,11 +32,11 @@ function openCountryMenue(click){
 
     let html = ""
 
-    if(!visitlist[country] || visitlist[country].length === 0){
+    if(!visitlist[country] || visitlist[country].visits.length === 0){
         html = "<p>no recordet visists</p>"
     }
     else {
-        visitlist[country]?.forEach((visit) => {
+        visitlist[country]?.visits?.forEach((visit) => {
             html += `<a href="./html/${visit.location}/index.html">${visit.HRname}</a>`
         })
     }
@@ -54,7 +53,9 @@ function openCountryMenue(click){
 
     linkOverlay.style.display = "flex"
 
-    click.target.classList.add("active")
+    document.querySelectorAll(`svg *[data-country='${country}']`).forEach((elem)=>{
+        elem.classList.add("active")
+    })
 
     setTimeout(function(){
         document.addEventListener("click",closeCountryMenue)
@@ -74,13 +75,26 @@ function closeCountryMenue(click){
 
 function generatePhoneNav(){
     let phoneNavHtml = ""
-    for (let key in visitlist) {
+    for (let key in visitlist){
         let country = visitlist[key]
-        phoneNavHtml += `<h2>${HRCountryNames[key]}</h2>`
+        phoneNavHtml += `<h2>${country.HRname}</h2>`
 
-        country.forEach((visit)=>{
+        country.visits.forEach((visit)=>{
             phoneNavHtml += `<a href="./html/${visit.location}/">${visit.HRname}</a>`
         })
     }
+
     document.querySelector('#phone-nav').innerHTML = phoneNavHtml
+}
+
+function handelHover(country){
+    document.querySelectorAll(`svg *[data-country='${country}']`).forEach((elem)=>{
+        elem.classList.add("hovered")
+    })
+}
+
+function endHover(){
+    document.querySelectorAll(`svg .hovered`).forEach((elem)=>{
+        elem.classList.remove("hovered")
+    })
 }
