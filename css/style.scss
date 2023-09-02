@@ -93,7 +93,7 @@ path, polygon {
     fill: #2ec7d9;
     cursor: pointer;
 
-    &:hover, &.active{
+    &.active, &.hovered{
       filter: url(#hover);
       fill: #00e4ff;
     }
