@@ -79,7 +79,7 @@ path, polygon {
   transition: all 0.3s;
 }
 path.visited, polygon.visited {
-  fill: #2ec7d9;
+  fill: #1fe8ff;
   cursor: pointer;
 }
 path.visited.active, path.visited.hovered, polygon.visited.active, polygon.visited.hovered {
